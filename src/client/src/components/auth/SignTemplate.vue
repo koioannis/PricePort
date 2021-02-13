@@ -17,7 +17,6 @@ export default {
   name: 'SignTemplate',
   methods: {
     changeRegisterLogin() {
-      console.log('in');
       this.signin = !this.signin;
     },
   },

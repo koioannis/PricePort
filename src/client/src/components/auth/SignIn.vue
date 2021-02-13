@@ -26,7 +26,6 @@ export default {
   name: 'SignIn',
   methods: {
     changeRegister() {
-      console.log('asd');
       this.$emit('changeRegisterLogin');
     },
   },

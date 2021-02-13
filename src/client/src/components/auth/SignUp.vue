@@ -13,9 +13,15 @@
       <input type="text" class="w-75 big-input" placeholder="password">
     </div>
     <div class="d-flex text-center">
-      <b-col class="forgot-btn pt-4 pb-4">
-        <span style="font-size: 0.7em">forgot my password</span></b-col>
-      <b-col class="login-btn pt-4 pb-4">
+      <b-col class="terms d-flex pt-4 pb-4 justify-content-center align-items-center">
+        <input type="checkbox" class="mb-1">
+        <div>
+        <span style="font-size: 0.7em;" class="ml-2">
+          I agreed to the <span style="color: #008080">terms</span>
+        </span>
+        </div>
+      </b-col>
+      <b-col class="register-btn pt-4 pb-4">
         <span style="font-size: 0.7em">Register</span></b-col>
     </div>
     <div class="d-flex pt-5 pb-5 text-center ml-3 mr-3">
@@ -65,22 +71,18 @@ export default {
       opacity: 0.9;
     }
 
-    .forgot-btn {
+    .terms {
       background-color: #F2F2F2;
       height: 100%;
       cursor: pointer;
     }
 
-    .forgot-btn:hover {
-      background-color: #f0eeee;
-    }
-
-    .login-btn {
+    .register-btn {
       background-color: #00FFFF;
       cursor: pointer;
     }
 
-    .login-btn:hover {
+    .register-btn:hover {
       background-color: #00ffffcb;
     }
 
