@@ -1,8 +1,23 @@
 <template>
   <div id="app">
+    <Navbar />
+    <SignTemplate />
     <router-view></router-view>
   </div>
 </template>
+
+<script>
+import Navbar from '@/components/Navbar.vue';
+import SignTemplate from '@/components/auth/SignTemplate.vue';
+
+export default {
+  name: 'App',
+  components: {
+    Navbar,
+    SignTemplate,
+  },
+};
+</script>
 
 <style lang="scss">
   $font-dir: '../src/assets/fonts/';
@@ -16,7 +31,8 @@
     src: url('#{$font-dir}/now/Now-Medium.otf');
   }
 
-  #app {
+  body, html {
     font-family: 'Now' !important;
+    overflow-x: hidden;
   }
 </style>
