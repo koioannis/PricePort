@@ -5,7 +5,7 @@
     </div>
     <div class="product-info">
       <h5 style="color: #00BDFF" class="font-weight-bold">0,99€</h5>
-      <h6 style="line-height: 0.6em;color: black">Product 1</h6>
+      <h6 style="line-height: 0.6em;color: black">Product {{product}}</h6>
       <small class="text-muted">from Store 1</small>
     </div>
   </div>
@@ -14,6 +14,9 @@
 <script>
 export default {
   name: 'ProductCard',
+  props: [
+    'product',
+  ],
 };
 </script>
 

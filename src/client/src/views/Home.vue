@@ -1,18 +1,20 @@
 <template>
-  <div id="home">
+  <div id="home" class="mb-4">
     <div class="top-picks">
       <div class="d-flex justify-content-between pt-4 title">
         <h4>Top Picks</h4>
         <div>
-          <img src="@/assets/svg/white_left_arrow.svg" class="arrow">
-          <img src="@/assets/svg/white_right_arrow.svg" class="arrow ml-3">
+          <img src="@/assets/svg/white_left_arrow.svg" class="arrow"
+            @click="leftArrow('top-picks', 0)">
+          <img src="@/assets/svg/white_right_arrow.svg" class="arrow ml-3"
+            @click="rightArrow('top-picks', 0)">
         </div>
       </div>
 
-      <div class="mr-4 d-inline-flex card-row">
-        <div class="ml-5" v-for="index in 10" :key=index>
+      <div class="mr-4 d-inline-flex card-row" ref="top-picks">
+        <div class="ml-5" v-for="product in products" :key=product>
           <router-link to="/" class="product">
-            <ProductCard />
+            <ProductCard :product="product"/>
           </router-link>
         </div>
       </div>
@@ -22,14 +24,18 @@
       <div class="d-flex justify-content-between pt-4 title">
         <h4>Products tagged with <span class="font-weight-bold mark">Technology</span></h4>
         <div>
-          <img src="@/assets/svg/black_left_arrow.svg" class="arrow">
-          <img src="@/assets/svg/black_right_arrow.svg" class="arrow ml-3">
+          <img src="@/assets/svg/black_left_arrow.svg" class="arrow"
+            @click="leftArrow('technology', 1)">
+          <img src="@/assets/svg/black_right_arrow.svg" class="arrow ml-3"
+            @click="rightArrow('technology', 1)">
         </div>
       </div>
 
-      <div class="mr-4 d-inline-flex card-row">
-        <div class="ml-5" v-for="index in 10" :key=index>
-          <ProductCard />
+      <div class="mr-4 d-inline-flex card-row" ref="technology">
+        <div class="ml-5" v-for="product in products" :key=product>
+          <router-link to="/" class="product">
+            <ProductCard :product="product"/>
+          </router-link>
         </div>
       </div>
     </div>
@@ -43,6 +49,32 @@ export default {
   name: 'Home',
   components: {
     ProductCard,
+  },
+  data() {
+    return {
+      currentIndex: new Array([0, 0]),
+      products: 10,
+      productsMax: 0,
+    };
+  },
+  mounted() {
+    this.productsMax = this.products - Math.floor(this.$refs['top-picks'].clientWidth / 288);
+  },
+  methods: {
+    leftArrow(element, index) {
+      if (this.currentIndex[0][index] === this.productsMax) return;
+      // eslint-disable-next-line no-plusplus
+      if (++this.currentIndex[0][index] < 0) return;
+      const currentPosition = ((parseInt(this.$refs[element].style.marginLeft, 10) || 0) - 18);
+      this.$refs[element].style.marginLeft = `${currentPosition}em`;
+    },
+    rightArrow(element, index) {
+      if (this.currentIndex[0][index] === 0) return;
+      // eslint-disable-next-line no-plusplus
+      if (this.currentIndex[0][index]-- <= 0) return;
+      const currentPosition = ((parseInt(this.$refs[element].style.marginLeft, 10) || 0) + 18);
+      this.$refs[element].style.marginLeft = `${currentPosition}em`;
+    },
   },
 };
 </script>
@@ -72,7 +104,6 @@ export default {
 
     .card-row {
       margin-top: 1%;
-      overflow: hidden;
       width: 100%;
     }
 

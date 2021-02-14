@@ -14,11 +14,11 @@
     </div>
     <div class="d-flex text-center">
       <b-col class="terms d-flex pt-4 pb-4 justify-content-center align-items-center">
-        <input type="checkbox" class="mb-1">
+        <input type="checkbox" class="mb-1" id="terms">
         <div>
-        <span style="font-size: 0.7em;" class="ml-2">
-          I agreed to the <span style="color: #008080">terms</span>
-        </span>
+          <span style="font-size: 0.7em;" class="ml-2">
+            I agreed to the <span style="color: #008080">terms</span>
+          </span>
         </div>
       </b-col>
       <b-col class="register-btn pt-4 pb-4">
@@ -74,7 +74,6 @@ export default {
     .terms {
       background-color: #F2F2F2;
       height: 100%;
-      cursor: pointer;
     }
 
     .register-btn {
