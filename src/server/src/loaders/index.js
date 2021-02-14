@@ -4,6 +4,7 @@ const dependencyInjector = require('./dependencyInjector');
 const Logger = require('./logger');
 const User = require('../models/user/User');
 const refreshToken = require('../models/user/RefreshToken');
+const product = require('../models/Product');
 
 const loader = async (expressApp) => {
   // eslint-disable-next-line no-unused-vars
@@ -19,10 +20,17 @@ const loader = async (expressApp) => {
     name: 'refreshTokenModel',
     model: refreshToken,
   };
+
+  const productModel = {
+    name: 'productModel',
+    model: product,
+  };
+
   await dependencyInjector({
     models: [
       userModel,
       refreshTokenModel,
+      productModel,
     ],
   });
 
