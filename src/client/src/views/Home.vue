@@ -11,7 +11,8 @@
         </div>
       </div>
 
-      <div class="mr-4 d-inline-flex card-row" ref="top-picks">
+      <div class="mr-4 d-inline-flex card-row" ref="top-picks" id="top-picks"
+        @animationend="slideLeftTop=false; slideRightTop=false">
         <div class="ml-5" v-for="product in products" :key=product>
           <router-link to="/product/sdgasd" class="product">
             <ProductCard :product="product"/>
@@ -31,7 +32,7 @@
         </div>
       </div>
 
-      <div class="mr-4 d-inline-flex card-row" ref="technology">
+      <div class="mr-4 d-inline-flex card-row" ref="technology" id="technology">
         <div class="ml-5" v-for="product in products" :key=product>
           <router-link to="/product/sdgasd" class="product">
             <ProductCard :product="product"/>
@@ -45,6 +46,8 @@
 <script>
 import ProductCard from '@/components/home/ProductCard.vue';
 
+const $ = require('jquery');
+
 export default {
   name: 'Home',
   components: {
@@ -55,6 +58,7 @@ export default {
       currentIndex: new Array([0, 0]),
       products: 10,
       productsMax: 0,
+      animated: false,
     };
   },
   mounted() {
@@ -62,17 +66,17 @@ export default {
   },
   methods: {
     leftArrow(element, index) {
-      if (this.currentIndex[0][index] === this.productsMax) return;
-      // eslint-disable-next-line no-plusplus
-      if (++this.currentIndex[0][index] < 0) return;
+      // eslint-disable-next-line no-plusplus, max-len
+      if (this.currentIndex[0][index] === this.productsMax || ++this.currentIndex[0][index] < 0) return;
       const currentPosition = ((parseInt(this.$refs[element].style.marginLeft, 10) || 0) - 18);
+      $(`#${element}`).animate({ 'margin-left': `${currentPosition}em` });
       this.$refs[element].style.marginLeft = `${currentPosition}em`;
     },
     rightArrow(element, index) {
-      if (this.currentIndex[0][index] === 0) return;
       // eslint-disable-next-line no-plusplus
-      if (this.currentIndex[0][index]-- <= 0) return;
+      if (this.currentIndex[0][index] === 0 || this.currentIndex[0][index]-- <= 0) return;
       const currentPosition = ((parseInt(this.$refs[element].style.marginLeft, 10) || 0) + 18);
+      $(`#${element}`).animate({ 'margin-left': `${currentPosition}em` });
       this.$refs[element].style.marginLeft = `${currentPosition}em`;
     },
   },

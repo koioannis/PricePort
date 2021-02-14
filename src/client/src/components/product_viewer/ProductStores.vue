@@ -36,7 +36,7 @@
               <input type="text" class="small-input" placeholder="0,99€">
             </b-col>
             <b-col lg="5">
-              <div class="pl-5 pr-5 add-btn">Add</div>
+              <div class="pl-5 pr-5 add-btn mt-lg-auto mt-3">Add</div>
             </b-col>
           </b-row>
         </div>
