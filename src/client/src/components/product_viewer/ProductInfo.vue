@@ -79,6 +79,10 @@ export default {
       width: 18em !important;
       height: 18em !important;
     }
+
+    .product-wrapper-info {
+      top: 49%;
+    }
   }
 
   @media only screen and (max-width: 1000px) {

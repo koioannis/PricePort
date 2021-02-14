@@ -5,9 +5,9 @@
         <h4>Top Picks</h4>
         <div>
           <img src="@/assets/svg/white_left_arrow.svg" class="arrow"
-            @click="leftArrow('top-picks', 0)">
-          <img src="@/assets/svg/white_right_arrow.svg" class="arrow ml-3"
             @click="rightArrow('top-picks', 0)">
+          <img src="@/assets/svg/white_right_arrow.svg" class="arrow ml-3"
+            @click="leftArrow('top-picks', 0)">
         </div>
       </div>
 
@@ -26,9 +26,9 @@
         <h4>Products tagged with <span class="font-weight-bold mark">Technology</span></h4>
         <div>
           <img src="@/assets/svg/black_left_arrow.svg" class="arrow"
-            @click="leftArrow('technology', 1)">
-          <img src="@/assets/svg/black_right_arrow.svg" class="arrow ml-3"
             @click="rightArrow('technology', 1)">
+          <img src="@/assets/svg/black_right_arrow.svg" class="arrow ml-3"
+            @click="leftArrow('technology', 1)">
         </div>
       </div>
 
