@@ -13,7 +13,7 @@
 
       <div class="mr-4 d-inline-flex card-row" ref="top-picks">
         <div class="ml-5" v-for="product in products" :key=product>
-          <router-link to="/" class="product">
+          <router-link to="/product/sdgasd" class="product">
             <ProductCard :product="product"/>
           </router-link>
         </div>
@@ -33,7 +33,7 @@
 
       <div class="mr-4 d-inline-flex card-row" ref="technology">
         <div class="ml-5" v-for="product in products" :key=product>
-          <router-link to="/" class="product">
+          <router-link to="/product/sdgasd" class="product">
             <ProductCard :product="product"/>
           </router-link>
         </div>
@@ -80,7 +80,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  #app {
+  #home {
+    margin-top: 6.8em;
+
     .top-picks {
       background: rgb(0,255,255);
       background: linear-gradient(48deg, rgba(0,255,255,1) 0%, rgba(0,189,255,1) 100%);

@@ -1,5 +1,5 @@
 <template>
-  <b-navbar toggleable="md" varient="light" id="navbar">
+  <b-navbar toggleable="md" varient="light" id="navbar" class="fixed-top">
     <b-navbar-brand href="/">
       <img src="@/assets/svg/logo.svg" class="logo-img">
       <b-navbar-brand class="ml-3">PRICEPORT</b-navbar-brand>
@@ -49,8 +49,9 @@ export default {
   #navbar {
     padding-top: 1.2em;
     padding-bottom: 1.2em;
-    margin-left: 3%;
-    margin-right: 3%;
+    padding-left: 3%;
+    padding-right: 3%;
+    background-color: white;
 
     .logo-img {
       width: 3em;
