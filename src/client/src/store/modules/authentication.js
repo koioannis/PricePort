@@ -1,5 +1,4 @@
 import axios from 'axios';
-import authErrorMessages from '../errors';
 
 const authentication = {
   namespaced: true,
@@ -60,9 +59,8 @@ const authentication = {
             context.commit('retrieveAdmin', admin);
             resolve(response);
           })
-          .catch((error) => {
-            const message = authErrorMessages(error.response.status);
-            reject(message);
+          .catch(() => {
+            reject();
           });
       });
     },
@@ -86,9 +84,8 @@ const authentication = {
             context.commit('retrieveAdmin', false);
             resolve(response);
           })
-          .catch((error) => {
-            const message = authErrorMessages(error.response.status);
-            reject(message);
+          .catch(() => {
+            reject();
           });
       });
     },

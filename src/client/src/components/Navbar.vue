@@ -18,10 +18,12 @@
           <img src="@/assets/svg/question.svg" class="small-icon mr-4">
           <img src="@/assets/svg/report.svg" class="small-icon mr-5">
         </div>
-        <b-button size="md" class="my-button register-button mr-4"
+        <b-button size="md" class="my-button register-button mr-4" v-if="!loggedIn"
           @click="signin">Register</b-button>
-        <b-button size="md" class="my-button login-button"
+        <b-button size="md" class="my-button login-button" v-if="!loggedIn"
           @click="login">Login</b-button>
+        <b-button size="md" class="my-button register-button mr-4" v-else
+          @click="logout">Logout</b-button>
       </b-navbar-nav>
     </b-collapse>
   </b-navbar>
@@ -40,6 +42,17 @@ export default {
     signin() {
       EventBus.$emit('signinOption', false);
       this.$bvModal.show('sign-in');
+    },
+    logout() {
+      this.$store.dispatch('auth/logout')
+        .then(() => {
+          window.location.reload();
+        });
+    },
+  },
+  computed: {
+    loggedIn() {
+      return this.$store.getters['auth/loggedIn'];
     },
   },
 };

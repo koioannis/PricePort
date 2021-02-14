@@ -55,7 +55,7 @@ const expressLoader = (app) => {
   });
   // use next parameter to trigger this function
   // eslint-disable-next-line no-unused-vars
-  app.use((error, req, res) => {
+  app.use((error, req, res, next) => {
     res.status(error.status || 500);
 
     if (isCelebrateError(error)) {

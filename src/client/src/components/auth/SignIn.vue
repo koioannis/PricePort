@@ -1,15 +1,16 @@
 <template>
-  <div id="signin">
+  <form @submit.prevent="login" id="signin">
     <div class="input-style">
-      <input type="text" class="w-75 big-input" placeholder="email">
+      <input type="email" class="w-75 big-input" placeholder="email" v-model="email" required>
     </div>
     <div class="input-style">
-      <input type="text" class="w-75 big-input" placeholder="password">
+      <input type="password" class="w-75 big-input" placeholder="password"
+        v-model="password" required>
     </div>
     <div class="d-flex text-center">
       <b-col class="forgot-btn pt-4 pb-4">
         <span style="font-size: 0.7em">forgot my password</span></b-col>
-      <b-col class="login-btn pt-4 pb-4">
+      <b-col class="login-btn pt-4 pb-4" @click="$refs.submitBtn.click()">
         <span style="font-size: 0.7em">Login</span></b-col>
     </div>
     <div class="d-flex pt-5 pb-5 text-center ml-3 mr-3">
@@ -18,15 +19,35 @@
         <b-button class="my-button" @click="changeRegister">Register</b-button>
       </b-col>
     </div>
-  </div>
+    <button type="submit" ref="submitBtn" class="d-none"></button>
+  </form>
 </template>
 
 <script>
 export default {
   name: 'SignIn',
+  data() {
+    return {
+      email: null,
+      password: null,
+    };
+  },
   methods: {
     changeRegister() {
       this.$emit('changeRegisterLogin');
+    },
+    login() {
+      this.$store.dispatch('auth/login', {
+        email: this.email,
+        password: this.password,
+      })
+        .then(() => {
+          window.location.reload();
+        })
+        .catch(() => {
+          this.email = '';
+          this.password = '';
+        });
     },
   },
 };
