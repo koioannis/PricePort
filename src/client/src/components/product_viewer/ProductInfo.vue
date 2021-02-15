@@ -5,7 +5,8 @@
         <div class="h5" v-if="editing == false">Top Picks</div>
         <div class="h5" v-else>Editing</div>
         <div v-if="editing == false">
-          <img src="@/assets/svg/edit.svg" class="icons mr-3" @click="toggleEditing">
+          <img src="@/assets/svg/edit.svg" class="icons mr-3" @click="toggleEditing"
+            v-if="loggedIn">
           <img src="@/assets/svg/report_black.svg" class="icons">
         </div>
         <div v-else>
@@ -15,9 +16,9 @@
     </div>
     <div class="product-wrapper-info">
       <div class="product-img"></div>
-      <div class="h3 mt-5 ml-2 text-left" v-if="editing == false">Product Name</div>
+      <div class="h3 mt-5 ml-2 text-left" v-if="editing == false">{{productName}}</div>
       <input type="text" class="mt-5 ml-2 product-input-editing" v-else
-        placeholder="Product Name">
+        placeholder="Product Name" v-model="productNewName">
     </div>
   </div>
 </template>
@@ -27,10 +28,26 @@ export default {
   name: 'ProductInfo',
   props: [
     'editing',
+    'productName',
   ],
+  data() {
+    return {
+      productNewName: this.productName,
+    };
+  },
+  watch: {
+    productNewName() {
+      this.$emit('changeProductName', this.productNewName);
+    },
+  },
   methods: {
     toggleEditing() {
       this.$emit('toggleEdit');
+    },
+  },
+  computed: {
+    loggedIn() {
+      return this.$store.getters['auth/loggedIn'];
     },
   },
 };

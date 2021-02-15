@@ -20,6 +20,8 @@
         </div>
         <b-button size="md" class="my-button register-button mr-4" v-if="!loggedIn"
           @click="signin">Register</b-button>
+        <b-button size="md" class="my-button register-button mr-4" v-else
+          @click="addProduct">+Product</b-button>
         <b-button size="md" class="my-button login-button" v-if="!loggedIn"
           @click="login">Login</b-button>
         <b-button size="md" class="my-button register-button mr-4" v-else
@@ -48,6 +50,9 @@ export default {
         .then(() => {
           window.location.reload();
         });
+    },
+    addProduct() {
+      this.$router.push({ path: '/product' });
     },
   },
   computed: {

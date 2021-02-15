@@ -4,9 +4,9 @@
       <img src="@/assets/bag.png">
     </div>
     <div class="product-info">
-      <h5 style="color: #00BDFF" class="font-weight-bold">0,99€</h5>
-      <h6 style="line-height: 0.6em;color: black">Product {{product}}</h6>
-      <small class="text-muted">from Store 1</small>
+      <h5 style="color: #00BDFF" class="font-weight-bold">{{product.stores[0].price}}€</h5>
+      <h6 style="line-height: 0.6em;color: black">Product {{product.name}}</h6>
+      <small class="text-muted">from Store {{product.stores[0].name}}</small>
     </div>
   </div>
 </template>

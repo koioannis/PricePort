@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="d-flex justify-content-between border-top pt-2 pb-2 pl-5 pr-5">
+    <div class="d-flex justify-content-between border-top pt-2 pb-2 pl-5 pr-5 border-bottom">
       <div class="d-flex">
         <p class="mr-3 pt-3">filters:</p>
         <img src="@/assets/svg/plus.svg" style="width: 2em">
@@ -10,56 +10,63 @@
       </div>
     </div>
 
-    <div class="ml-1 mr-1 pl-5 pr-5 pt-4 pb-4 border-top" v-if="editing == true">
+    <div class="ml-1 mr-1 pl-5 pr-5 pt-4 pb-4 border-top border-bottom" v-if="editing == true">
       <div class="d-flex align-items-center" style="width: 100%">
         <img src="@/assets/svg/plus.svg" style="width: 5.5em;cursor: pointer">
-        <div style="width: 100%">
+        <form @submit.prevent="$emit('addProductAction')" style="width: 100%">
           <b-row class="ml-5 mt-2">
             <b-col lg="1" class="mt-1">url: </b-col>
             <b-col lg="11">
-              <input type="text" class="big-input" placeholder="www.store0.com">
+              <input type="text" class="big-input" placeholder="www.store0.com"
+                v-model="storeUrl" required>
             </b-col>
           </b-row>
           <b-row class="ml-5 mt-2">
             <b-col lg="1" class="mt-1">name:</b-col>
             <b-col lg="11">
-              <input type="text" class="big-input" placeholder="Store 0">
+              <input type="text" class="big-input" placeholder="Store 0"
+                v-model="storeName" required>
             </b-col>
           </b-row>
           <b-row class="ml-5 mt-2">
             <b-col lg="1" class="mt-1">price:</b-col>
             <b-col lg="2">
-              <input type="text" class="small-input" placeholder="0,59€">
+              <input type="text" class="small-input" placeholder="0,59€"
+                v-model="productPrice" required>
             </b-col>
             <b-col lg="2" class="mt-1" style="max-width: fit-content">shipping:</b-col>
             <b-col lg="2">
-              <input type="text" class="small-input" placeholder="0,99€">
+              <input type="text" class="small-input" placeholder="0,99€"
+                v-model="shippingPrice" required>
             </b-col>
             <b-col lg="5">
-              <div class="pl-5 pr-5 add-btn mt-lg-auto mt-3">Add</div>
+              <button class="pl-5 pr-5 add-btn mt-lg-auto mt-3">Add</button>
             </b-col>
           </b-row>
-        </div>
+        </form>
       </div>
     </div>
 
-    <div v-for="shop in shops" :key=shop class="ml-1 mr-1 pl-5 pr-5 pt-4 pb-4 border-top
-      d-flex justify-content-between align-items-center">
-      <div class="d-flex align-items-center">
-        <div class="shop-img"></div>
-        <div class="ml-3 mt-2">
-          <h3>Store {{shop}}</h3>
-          <div class="h4 stars">★★★★★</div>
+    <div v-if="shops != null">
+      <div v-for="(shop, index) in shops" :key=index class="ml-1 mr-1 pl-5 pr-5 pt-4 pb-4 border-top
+        d-flex justify-content-between align-items-center">
+        <div class="d-flex align-items-center">
+          <div class="shop-img"></div>
+          <div class="ml-3 mt-2">
+            <h3>Store {{shop.name}}</h3>
+            <div class="h4 stars">★★★★</div>
+          </div>
         </div>
-      </div>
-      <div class="d-flex pt-3">
-        <img src="@/assets/svg/report_grey.svg" class="mr-4 report">
-        <div>
-          <h4>0,99€</h4>
-          <p class="small text-muted">+0,99€ shipping</p>
+        <div class="d-flex pt-3">
+          <img src="@/assets/svg/report_grey.svg" class="mr-4 report">
+          <div>
+            <h4>{{shop.price}}€</h4>
+            <p class="small text-muted">+{{shop.shipping}}€ shipping</p>
+          </div>
         </div>
       </div>
     </div>
+    <div v-else class="h4 mt-4 text-center text-muted">There are no stores</div>
   </div>
 </template>
 
@@ -68,11 +75,44 @@ export default {
   name: 'ProductStores',
   props: [
     'editing',
+    'addProduct',
   ],
   data() {
     return {
-      shops: 15,
+      shops: null,
+      storeUrl: null,
+      storeName: null,
+      productPrice: null,
+      shippingPrice: null,
     };
+  },
+  watch: {
+    storeUrl() {
+      this.$emit('changeStoreUrl', this.storeUrl);
+    },
+    storeName() {
+      this.$emit('changeStoreName', this.storeName);
+    },
+    productPrice() {
+      this.$emit('changeProductPrice', this.productPrice);
+    },
+    shippingPrice() {
+      this.$emit('changeShippingPrice', this.shippingPrice);
+    },
+  },
+  created() {
+    if (this.addProduct) return;
+    this.$store.dispatch('product/getProductStores', {
+      productId: this.$router.history.current.params.productId,
+    })
+      .then((data) => {
+        this.$emit('changeProductName', data.name);
+        this.$emit('giveStores', data.stores);
+        this.shops = data.stores;
+      })
+      .catch(() => {
+        this.shops = null;
+      });
   },
 };
 </script>

@@ -14,7 +14,7 @@
       <div class="mr-4 d-inline-flex card-row" ref="top-picks" id="top-picks"
         @animationend="slideLeftTop=false; slideRightTop=false">
         <div class="ml-5" v-for="product in products" :key=product>
-          <router-link to="/product/sdgasd" class="product">
+          <router-link :to="'/product/' + '602a6e0c6b2588368001924d'" class="product">
             <ProductCard :product="product"/>
           </router-link>
         </div>
@@ -56,13 +56,21 @@ export default {
   data() {
     return {
       currentIndex: new Array([0, 0]),
-      products: 10,
+      products: null,
       productsMax: 0,
       animated: false,
     };
   },
   mounted() {
     this.productsMax = this.products - Math.floor(this.$refs['top-picks'].clientWidth / 288);
+  },
+  created() {
+    this.$store.dispatch('product/getRandomProducts', {
+      count: 20,
+    })
+      .then((data) => {
+        this.products = data;
+      });
   },
   methods: {
     leftArrow(element, index) {
