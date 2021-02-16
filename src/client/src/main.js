@@ -11,7 +11,7 @@ import 'bootstrap-vue/dist/bootstrap-vue.css';
 
 import interceptorsSetup from './helpers/interseptors';
 
-axios.defaults.baseURL = 'http://localhost:3000/api/v1';
+axios.defaults.baseURL = 'http://192.168.1.5:3000/api/v1';
 interceptorsSetup();
 
 Vue.use(BootstrapVue);

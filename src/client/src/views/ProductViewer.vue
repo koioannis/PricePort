@@ -55,8 +55,8 @@ export default {
           shipping: this.shippingPrice,
           url: this.storeUrl,
         })
-          .then(() => {
-            this.$router.push({ path: `/product/${this.productId}` });
+          .then((response) => {
+            this.$router.push({ path: `/product/${response.id}` });
             window.location.reload();
           });
       } else {

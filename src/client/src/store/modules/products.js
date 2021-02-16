@@ -25,8 +25,8 @@ const product = {
             Authorization: `Bearer ${context.rootState.auth.accessToken}`,
           },
         })
-          .then(() => {
-            resolve();
+          .then((resposne) => {
+            resolve(resposne.data);
           })
           .catch(() => {
             reject();
