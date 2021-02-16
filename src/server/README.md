@@ -1,5 +1,5 @@
 
-# Cookme Backend
+# PricePort Backend
 
 # Pre-requisites
 - Install [Node.js](https://nodejs.org/en/)  (This project was created with v14.15.3)
